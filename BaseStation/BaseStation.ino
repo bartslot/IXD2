@@ -119,21 +119,22 @@ void loop()
   int ldrValue = analogRead(LDR); //Check sensor readings
   if (ldrValue < 20) // If phone is on
   {
+    Serial.println(ldrValue);
     Serial.println("Start the Game");
     //ONE TIME START GREEN
     FadeInOut(80, 2, 1); //Color (green) / Wait / Times
-    
     go = true; //Bool to stay in game mode
     
   } else {
+    Serial.println("Stop the Game");
     go = false;
-    FadeInOut(192, 10, 2); //Color (red) / Wait / Times
+    FadeInOut(192, 10, 2); //Color (purple) / Wait / Times
     
   }
   if(go == true) 
   {
       leds[0] = CHSV(hueValue,255,255); //hue, saturation, value
-    
+      FastLED.show();
     if(hueValue = 255) { hueValue = 0; } //Reset the HueValue to 0 if 255 (max hue is reached).
   
     for (int i = 0; i<NUM_LEDS; i++) 
